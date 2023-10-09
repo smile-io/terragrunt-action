@@ -33,4 +33,10 @@ runs:
   steps:
     - name: Execute Terragrunt
       shell: bash
-      run: bash ${{ github.action_path }}/src/main.sh
+      env:
+        INPUT_TF_VERSION: ${{ inputs.tf_version }}
+        INPUT_TG_VERSION: ${{ inputs.tg_version }}
+        INPUT_TG_COMMAND: ${{ inputs.tg_command }}
+        INPUT_TG_COMMENT: ${{ inputs.tg_comment }}
+        INPUT_TG_DIR: ${{ inputs.tg_dir }}
+      run: bash ${{ github.action_path }}/src/main.sh 
