@@ -32,5 +32,5 @@ runs:
   using: 'composite'
   steps:
     - name: Execute Terragrunt
-      run: |
-        bash src/main.sh
+      shell: bash
+      run: src/main.sh
