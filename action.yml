@@ -33,4 +33,4 @@ runs:
   steps:
     - name: Execute Terragrunt
       shell: bash
-      run: main.sh
+      run: bash main.sh
