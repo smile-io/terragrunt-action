@@ -31,9 +31,6 @@ outputs:
 runs:
   using: 'composite'
   steps:
-    - shell: bash
-      run: |
-        ls -la 
     - name: Execute Terragrunt
       shell: bash
-      run: bash main.sh
+      run: bash ${{ github.action_path }}/src/main.sh
