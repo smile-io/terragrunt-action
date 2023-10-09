@@ -2,6 +2,11 @@
 
 A GitHub Action for installing and running Terragrunt
 
+
+## Requirements
+- jq
+- tfenv
+- tgswitch
 ## Inputs
 
 Supported GitHub action inputs:
@@ -23,7 +28,6 @@ Supported environment variables:
 | GITHUB_TOKEN          | GitHub token used to add comment to Pull request                                                            |
 | TF_LOG                | Log level for Terraform                                                                                     |
 | TF_VAR_name           | Define custom variable name as inputs                                                                       |
-| INPUT_PRE_EXEC_number | Environment variable is utilized to provide custom commands that will be executed before running Terragrunt |
 
 ## Outputs
 
@@ -56,7 +60,7 @@ jobs:
         uses: actions/checkout@main
 
       - name: Check terragrunt HCL
-        uses: gruntwork-io/terragrunt-action@v1
+        uses: smile-io/terragrunt-action@v1
         with:
           tf_version: ${{ env.tf_version }}
           tg_version: ${{ env.tg_version }}
@@ -71,7 +75,7 @@ jobs:
         uses: actions/checkout@main
 
       - name: Plan
-        uses: gruntwork-io/terragrunt-action@v1
+        uses: smile-io/terragrunt-action@v1
         with:
           tf_version: ${{ env.tf_version }}
           tg_version: ${{ env.tg_version }}
@@ -88,28 +92,10 @@ jobs:
         uses: actions/checkout@main
 
       - name: Deploy
-        uses: gruntwork-io/terragrunt-action@v1
+        uses: smile-io/terragrunt-action@v1
         with:
           tf_version: ${{ env.tf_version }}
           tg_version: ${{ env.tg_version }}
           tg_dir: ${{ env.working_dir }}
           tg_command: 'apply'
-```
-
-Example of passing custom code before running Terragrunt:
-
-```yaml
-...
-- name: Plan
-  uses: gruntwork-io/terragrunt-action@v1
-  env:
-    # configure git to use custom token to clone repository.
-    INPUT_PRE_EXEC_1: |
-      git config --global url."https://user:${{secrets.PAT_TOKEN}}@github.com".insteadOf "https://github.com"
-    # print git configuration
-    INPUT_PRE_EXEC_2: |
-      git config --global --list
-  with:
-    tg_command: 'plan'
-...
 ```
