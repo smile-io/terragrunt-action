@@ -33,4 +33,4 @@ runs:
   steps:
     - name: Execute Terragrunt
       shell: bash
-      run: bash main.sh
+      run: bash ${{ github.action_path }}/src/main.sh
