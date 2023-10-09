@@ -35,4 +35,4 @@ runs:
       uses: actions/checkout@v3
     - name: Execute Terragrunt
       shell: bash
-      run: src/main.sh
+      run: main.sh
