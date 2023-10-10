@@ -26,12 +26,15 @@ inputs:
 outputs:
   tg_action_output:
     description: 'Terragrunt execution output'
+    value: ${{ steps.terragrunt.outputs.tg_action_output }}
   tg_action_exit_code:
     description: 'Terragrunt exit code'
+    value: ${{ steps.terragrunt.outputs.tg_action_exit_code }}
 runs:
   using: 'composite'
   steps:
     - name: Execute Terragrunt
+      id: terragrunt
       shell: bash
       env:
         INPUT_TF_VERSION: ${{ inputs.tf_version }}
