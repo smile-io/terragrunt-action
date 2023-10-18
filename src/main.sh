@@ -115,12 +115,8 @@ function main {
   install_terraform "${tf_version}"
   install_terragrunt "${tg_version}"
 
-  # add auto approve for apply and destroy commands
-  if [[ "$tg_command" == "apply"* || "$tg_command" == "destroy"* || "$tg_command" == "run-all apply"* || "$tg_command" == "run-all destroy"* ]]; then
-    local -r tg_arg_and_commands="${tg_command} -auto-approve --terragrunt-non-interactive"
-  else
-    local -r tg_arg_and_commands="${tg_command}"
-  fi
+  local -r tg_arg_and_commands="${tg_command}"
+  
   run_terragrunt "${tg_dir}" "${tg_arg_and_commands}"
 
   local -r log_file="${terragrunt_log_file}"
